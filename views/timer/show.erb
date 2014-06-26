@@ -1,0 +1,8 @@
+# views/timer/show.erb
+<h1><%= @title %></h1>
+
+<form action="/stop_timer/<%= @timer.id %>" method="post" onlad>
+  <input type="submit" value="Stop Timer" />
+</form> 
+
+<span id="timer" onClick="beginTimer()">0000</span>
