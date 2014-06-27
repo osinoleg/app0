@@ -1,11 +1,11 @@
 # views/posts/index.erb
-<h1>Welcome to my blog!</h1>
-<ul>
-<% @posts.each do |post| %>
-  <li>
-    <h2><a href="/posts/<%= post.id %>"><%= post.title %></a>
-    <span><%= pretty_date(post.created_at) %></span>
-    </h2>
-  </li>
+<h1>Timer History</h1>
+
+<% @timers.each do |timer| %>
+  <% next if not timer.end_time %>
+
+    <h3><%= pretty_date(timer.created_at) %> :
+    	<span><%= timer.end_time - timer.start_time if timer.end_time %></span>
+    </h3>
+
 <% end %>
-</ul>

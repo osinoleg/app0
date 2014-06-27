@@ -54,7 +54,7 @@ end
 
 # Get all of our routes
 get "/" do
-  @posts = Post.order("created_at DESC")
+  @timers = Timer.order("created_at DESC")
   erb :"posts/index"
 end
  
