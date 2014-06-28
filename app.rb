@@ -127,14 +127,17 @@ end
 post "/start_timer" do
   @timer = Timer.new(start_time: Time.now.getutc)
   if @timer.save
-    redirect "timers/#{@timer.id}"
+    @title = @timer.end_time - @timer.start_time if @timer.end_time
+    erb :"timer/show", :layout => false
+
   end
 end
 
 post "/stop_timer/:id" do
   @timer = Timer.find(params[:id])
   if @timer.update_attribute(:end_time, Time.now.getutc)
-    redirect "timers/#{@timer.id}"
+    @title = @timer.end_time - @timer.start_time if @timer.end_time
+    erb :"timer/timer_finished", :layout => false
   end
 end
 

@@ -10,6 +10,13 @@ function beginTimer()
 
 function timer()
 {
+	if(document.getElementById("timer") == null)
+	{
+		elapsedTime = 0;
+		clearInterval(counter);
+		return;
+	}
+
 	elapsedTime += 1;
 	if(false) // insert condition here
 	{
@@ -23,8 +30,21 @@ function timer()
 
 function startTimer(url)
 {
+	console.log("lol");
 	$.post( url, function( response ) {
-	    console.log( url ); // server response
-	    // render timer info
+	    console.log( "test" + response ); // server response
+	    $("#yield").html(response);
+	    beginTimer();
 	});
 }
+
+
+function stopTimer(url)
+{
+	console.log("lol_stop");
+	$.post( url, function( response ) {
+	    console.log( "test" + response ); // server response
+	    $("#yield").html(response);
+	});
+}
+
