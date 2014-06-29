@@ -55,7 +55,12 @@ end
 # Get all of our routes
 get "/" do
   @timers = Timer.order("created_at DESC")
-  erb :"posts/index"
+  @durations = []
+  @timers.each do |timer|
+    @durations << timer.end_time - timer.start_time if timer.end_time
+  end
+  erb :"index"
+
 end
  
 # Get the New Post form
