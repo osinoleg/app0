@@ -4,6 +4,10 @@
 <canvas id="graph" width="400" height="400"></canvas>
 
 
+<% @days.each do |day, day_value| %>
+    <h3><%= day %> : <%= day_value["total"] %></h3>
+<% end %>
+
 <% @timers.each do |timer| %>
   <% next if not timer.end_time %>
 
@@ -13,6 +17,11 @@
 
 <% end %>
 
+
+<% @days.each do |day, day_value| %>
+    <h3><%= day %> :
+    </h3>
+<% end %>
 
 <script>
 var graphData = JSON.parse( "<%= @durations.to_json %>" );

@@ -55,12 +55,30 @@ end
 # Get all of our routes
 get "/" do
   @timers = Timer.order("created_at DESC")
+  @days = Hash.new
   @durations = []
+  
+  #sort timers by days
   @timers.each do |timer|
-    @durations << timer.end_time - timer.start_time if timer.end_time
-  end
-  erb :"index"
+    next if not timer.end_time
 
+    dur = timer.end_time - timer.start_time
+
+    if @days[pretty_date(timer.created_at)] == nil then
+      @days[pretty_date(timer.created_at)] = { "total" => dur,
+                                               "durations" => [dur] }
+    else
+      @days[pretty_date(timer.created_at)]["durations"] << dur
+      @days[pretty_date(timer.created_at)]["total"] += dur
+    end
+  end  
+
+  @timers.each do |timer|
+    next if not timer.end_time
+    @durations << timer.end_time - timer.start_time
+  end
+
+  erb :"index"
 end
  
 # Get the New Post form
